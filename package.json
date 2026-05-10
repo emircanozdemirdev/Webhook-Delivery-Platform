@@ -1,0 +1,19 @@
+{
+  "name": "webhook-delivery-platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "typescript": "~5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
