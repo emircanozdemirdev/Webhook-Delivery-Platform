@@ -6,6 +6,8 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "declaration": true,
@@ -13,11 +15,7 @@
     "sourceMap": true,
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "baseUrl": ".",
-    "paths": {
-      "@webhook-delivery-platform/shared": ["./packages/shared/src/index.ts"]
-    }
+    "isolatedModules": true
   },
   "exclude": ["node_modules", "dist"]
 }

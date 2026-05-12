@@ -1,1 +1,1 @@
-export const SHARED_PACKAGE_NAME = "@webhook-delivery-platform/shared";
+export * from "./config.js";
