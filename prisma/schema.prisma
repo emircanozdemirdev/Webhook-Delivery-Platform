@@ -7,4 +7,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Domain models are added in Faz 2 (Adım 2.1).
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  apiKey    String   @unique
+  createdAt DateTime @default(now())
+  apps      App[]
+}
+
+model App {
+  id        String    @id @default(cuid())
+  tenantId  String
+  name      String
+  tenant    Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  webhooks  Webhook[]
+  events    Event[]
+  createdAt DateTime  @default(now())
+
+  @@index([tenantId])
+}
+
+model Webhook {
+  id         String            @id @default(cuid())
+  appId      String
+  url        String
+  secret     String
+  active     Boolean           @default(true)
+  app        App               @relation(fields: [appId], references: [id], onDelete: Cascade)
+  deliveries DeliveryAttempt[]
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@index([appId])
+}
+
+model Event {
+  id         String            @id @default(cuid())
+  appId      String
+  eventType  String
+  payload    Json
+  app        App               @relation(fields: [appId], references: [id], onDelete: Cascade)
+  deliveries DeliveryAttempt[]
+  createdAt  DateTime          @default(now())
+
+  @@index([appId])
+}
+
+model DeliveryAttempt {
+  id           String    @id @default(cuid())
+  eventId      String
+  webhookId    String
+  event        Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  webhook      Webhook   @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+  attempt      Int       @default(1)
+  status       String
+  httpStatus   Int?
+  responseBody String?
+  errorMessage String?
+  nextRetryAt  DateTime?
+  createdAt    DateTime  @default(now())
+
+  @@index([eventId])
+  @@index([webhookId])
+  @@index([status])
+}
