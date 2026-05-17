@@ -5,6 +5,7 @@ import { AppsModule } from "./apps/apps.module.js";
 import { HealthController } from "./health.controller.js";
 import { PrismaModule } from "./prisma/prisma.module.js";
 import { TenantsModule } from "./tenants/tenants.module.js";
+import { WebhooksModule } from "./webhooks/webhooks.module.js";
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TenantsModule } from "./tenants/tenants.module.js";
     PrismaModule,
     TenantsModule,
     AppsModule,
+    WebhooksModule,
   ],
   controllers: [HealthController],
 })

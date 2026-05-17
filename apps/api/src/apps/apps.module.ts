@@ -7,5 +7,6 @@ import { AppsService } from "./apps.service.js";
 @Module({
   controllers: [AppsController],
   providers: [AppsService, ApiKeyGuard],
+  exports: [AppsService],
 })
 export class AppsModule {}
