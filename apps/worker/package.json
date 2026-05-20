@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@webhook-delivery-platform/shared": "*",
-    "dotenv": "^17.4.2"
+    "bullmq": "^5.76.10",
+    "dotenv": "^17.4.2",
+    "undici": "^7.25.0"
   }
 }
