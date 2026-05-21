@@ -1,6 +1,7 @@
 import { Injectable, OnModuleDestroy } from "@nestjs/common";
 import { Queue } from "bullmq";
 import {
+  getDeliveryJobOptions,
   getRedisConnectionOptions,
   WEBHOOK_DELIVERY_JOB_NAME,
   WEBHOOK_DELIVERY_QUEUE_NAME,
@@ -17,7 +18,7 @@ export class WebhookDeliveryQueueService implements OnModuleDestroy {
   );
 
   async enqueueDelivery(data: WebhookDeliveryJobData): Promise<void> {
-    await this.queue.add(WEBHOOK_DELIVERY_JOB_NAME, data);
+    await this.queue.add(WEBHOOK_DELIVERY_JOB_NAME, data, getDeliveryJobOptions());
   }
 
   async onModuleDestroy(): Promise<void> {
