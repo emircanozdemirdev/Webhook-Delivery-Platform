@@ -9,5 +9,6 @@ import { WebhooksService } from "./webhooks.service.js";
   imports: [AppsModule],
   controllers: [WebhooksController],
   providers: [WebhooksService, ApiKeyGuard],
+  exports: [WebhooksService],
 })
 export class WebhooksModule {}
